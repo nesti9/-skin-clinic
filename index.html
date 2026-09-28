@@ -378,6 +378,9 @@
   .hero-right { display: flex; min-width: 0; flex-direction: column; gap: 14px; align-self: center; }
   .hero-photo-wrap { position: relative; }
   .photo-placeholder { position: relative; isolation: isolate; display: flex; align-items: flex-end; overflow: hidden; border: 1px solid rgba(137,104,63,.15); border-radius: 5px; background: linear-gradient(145deg,#e9dfd2 0%,#f8f4ed 49%,#d9c9b4 100%); box-shadow: var(--shadow-card); }
+  .photo-slot-image { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .45s ease; }
+  .photo-placeholder.has-photo .photo-slot-image { opacity: 1; }
+  .photo-placeholder.has-photo::before, .photo-placeholder.has-photo::after, .photo-placeholder.has-photo .photo-monogram, .photo-placeholder.has-photo .photo-placeholder-caption { display: none; }
   .photo-placeholder::before, .photo-placeholder::after { content: ''; position: absolute; z-index: -1; border: 1px solid rgba(137,104,63,.2); border-radius: 50%; pointer-events: none; }
   .photo-placeholder::before { width: 74%; aspect-ratio: 1; top: -16%; right: -10%; box-shadow: 0 0 0 22px rgba(255,255,255,.09), 0 0 0 52px rgba(137,104,63,.035); }
   .photo-placeholder::after { width: 48%; aspect-ratio: 1; bottom: 3%; left: -13%; background: radial-gradient(circle,rgba(255,255,255,.34),transparent 69%); }
@@ -536,11 +539,12 @@
     </div>
     <div class="hero-right fade-in stagger-2">
       <div class="hero-photo-wrap">
-        <div class="photo-placeholder photo-placeholder--hero" role="img" aria-label="Место для фотографии интерьера клиники. Файл: images/hero-clinic.jpg">
+        <div class="photo-placeholder photo-placeholder--hero">
+          <img class="photo-slot-image" src="hero-clinic.jpg" alt="Интерьер клиники эстетической косметологии" loading="eager" fetchpriority="high" decoding="async">
           <span class="photo-monogram" aria-hidden="true">Ю</span>
           <div class="photo-placeholder-caption">
             <span>Фотография клиники</span>
-            <strong>images/hero-clinic.jpg</strong>
+            <strong>hero-clinic.jpg</strong>
             <small>горизонтальный кадр · 3:2</small>
           </div>
         </div>
@@ -573,11 +577,12 @@
     <div class="about-grid">
       <div class="about-image fade-in">
         <div class="about-image-box">
-          <div class="photo-placeholder photo-placeholder--about" role="img" aria-label="Место для фотографии косметологической процедуры. Файл: images/about-treatment.jpg">
+          <div class="photo-placeholder photo-placeholder--about">
+            <img class="photo-slot-image" src="about-treatment.jpg" alt="Косметологическая процедура по уходу за кожей" loading="lazy" decoding="async">
             <span class="photo-monogram" aria-hidden="true">Ю</span>
             <div class="photo-placeholder-caption">
               <span>Фотография процедуры</span>
-              <strong>images/about-treatment.jpg</strong>
+              <strong>about-treatment.jpg</strong>
               <small>вертикальный кадр · 4:5</small>
             </div>
           </div>
@@ -840,6 +845,14 @@
   const mobileMenu = document.getElementById('mobileMenu');
   const burgerBtn = document.getElementById('burgerBtn');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  document.querySelectorAll('.photo-slot-image').forEach(image => {
+    const showPhoto = () => {
+      if (image.naturalWidth > 0) image.closest('.photo-placeholder').classList.add('has-photo');
+    };
+    if (image.complete) showPhoto();
+    else image.addEventListener('load', showPhoto, { once: true });
+  });
 
   function updateHeader() {
     header.classList.toggle('scrolled', window.scrollY > 20);
