@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ю Skin Clinic — Эстетическая косметология в Барнауле</title>
+<meta name="description" content="Клиника эстетической и аппаратной косметологии в Барнауле. Индивидуальные протоколы лечения кожи. Запись на процедуры онлайн.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --white: #FFFFFF;
+    --milk: #FAF8F5;
+    --beige: #F2EDE6;
+    --grey-cold: #E8E9EB;
+    --grey-mid: #C4C4C4;
+    --grey-text: #8A8A8A;
+    --graphite: #2A2A2A;
+    --graphite-soft: #3D3D3D;
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --gold-pale: #F7F0E4;
+    --shadow-soft: 0 2px 24px rgba(0,0,0,0.06);
+    --shadow-card: 0 4px 32px rgba(0,0,0,0.08);
+    --radius: 2px;
+    --radius-lg: 4px;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--white);
+    color: var(--graphite);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* HEADER */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+    transition: box-shadow .3s;
+  }
+  header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.07); }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    height: 68px; display: flex; align-items: center;
+    justify-content: space-between; gap: 16px;
+  }
+  .logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+  .logo-main { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; letter-spacing: 0.08em; color: var(--graphite); }
+  .logo-sub { font-size: 9px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; font-weight: 500; margin-top: 2px; }
+  nav { display: flex; gap: 28px; align-items: center; }
+  nav a { text-decoration: none; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--graphite-soft); font-weight: 500; transition: color .2s; }
+  nav a:hover { color: var(--gold); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none;
+    cursor: pointer; border: none; transition: all .25s;
+    padding: 13px 28px; border-radius: var(--radius);
+  }
+  .btn-gold { background: var(--graphite); color: var(--white); }
+  .btn-gold:hover { background: var(--gold); }
+  .btn-outline { background: transparent; color: var(--graphite); border: 1px solid rgba(42,42,42,0.3); }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .nav-cta { padding: 10px 22px; font-size: 10px; }
+  .burger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .burger span { display: block; width: 22px; height: 1.5px; background: var(--graphite); margin: 5px 0; transition: all .3s; }
+
+  /* MOBILE MENU */
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 99;
+    background: var(--white);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+    transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1);
+  }
+  .mobile-menu.open { transform: translateX(0); }
+  .mobile-menu a { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--graphite); text-decoration: none; letter-spacing: 0.05em; transition: color .2s; }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-menu .btn { font-family: 'Manrope', sans-serif; font-size: 11px; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: flex-end; padding-top: 68px;
+    position: relative; overflow: hidden; background: var(--milk);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 75% 40%, rgba(201,169,110,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,169,110,0.05) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(201,169,110,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(201,169,110,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    padding: 80px 24px 100px; position: relative; z-index: 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end;
+  }
+  .hero-label {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 88px); font-weight: 300;
+    line-height: 1.05; color: var(--graphite); margin-bottom: 24px;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-desc { font-size: 15px; color: var(--grey-text); line-height: 1.8; max-width: 420px; margin-bottom: 40px; font-weight: 300; }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero-right { display: flex; flex-direction: column; gap: 16px; align-self: center; }
+  .hero-stat-card {
+    background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
+    border: 1px solid rgba(201,169,110,0.2);
+    padding: 22px 26px; border-radius: var(--radius-lg); box-shadow: var(--shadow-soft);
+  }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; color: var(--graphite); line-height: 1; margin-bottom: 4px; }
+  .stat-num span { color: var(--gold); }
+  .stat-label { font-size: 12px; color: var(--grey-text); }
+  .hero-stats-row { display: flex; gap: 16px; }
+  .hero-stats-row .hero-stat-card { flex: 1; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--graphite-soft); letter-spacing: 0.05em;
+    padding: 8px 14px; background: var(--white);
+    border: 1px solid var(--grey-cold); border-radius: 100px;
+  }
+  .hero-tag::before { content: '✓'; color: var(--gold); font-size: 10px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* SECTIONS */
+  section { padding: 96px 24px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); font-weight: 600; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 300; line-height: 1.15; color: var(--graphite); }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ABOUT */
+  .about { background: var(--white); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 64px; }
+  .about-image-box { aspect-ratio: 4/5; background: var(--beige); border-radius: var(--radius-lg); overflow: hidden; position: relative; }
+  .about-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--graphite); color: var(--white);
+    padding: 20px 24px; border-radius: var(--radius-lg);
+    text-align: center; box-shadow: var(--shadow-card);
+  }
+  .badge-num { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; line-height: 1; color: var(--gold-light); }
+  .badge-txt { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 4px; }
+  .about-image { position: relative; }
+  .about-text { font-size: 15px; color: var(--grey-text); line-height: 1.9; margin: 20px 0 36px; font-weight: 300; }
+  .about-feature { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--grey-cold); }
+  .about-feature:first-child { border-top: 1px solid var(--grey-cold); }
+  .feature-icon { width: 36px; height: 36px; background: var(--gold-pale); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 15px; }
+  .feature-title { font-size: 13px; font-weight: 600; color: var(--graphite); margin-bottom: 2px; }
+  .feature-desc { font-size: 12px; color: var(--grey-text); }
+
+  /* SERVICES */
+  .services { background: var(--milk); }
+  .services-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 56px; }
+  .services-intro-text { font-size: 15px; color: var(--grey-text); line-height: 1.8; font-weight: 300; }
+  .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .service-card {
+    background: var(--white); border: 1px solid rgba(201,169,110,0.15);
+    padding: 32px 28px; border-radius: var(--radius-lg);
+    cursor: pointer; transition: all .3s; position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    opacity: 0; transition: opacity .3s;
+  }
+  .service-card:hover { box-shadow: var(--shadow-card); transform: translateY(-2px); border-color: rgba(201,169,110,0.3); }
+  .service-card:hover::before { opacity: 1; }
+  .service-icon { width: 44px; height: 44px; margin-bottom: 20px; color: var(--gold); }
+  .service-category { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--graphite); margin-bottom: 10px; line-height: 1.2; }
+  .service-desc { font-size: 12px; color: var(--grey-text); line-height: 1.7; font-weight: 300; }
+  .service-arrow { position: absolute; bottom: 20px; right: 24px; color: var(--grey-mid); font-size: 16px; transition: all .3s; }
+  .service-card:hover .service-arrow { color: var(--gold); transform: translateX(4px); }
+
+  /* ADVANTAGES */
+  .advantages { background: var(--graphite); }
+  .advantages .section-label { color: var(--gold-light); }
+  .advantages .section-label::before { background: var(--gold-light); }
+  .advantages .section-title { color: var(--white); }
+  .advantages .section-title em { color: var(--gold-light); }
+  .advantages-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px;
+    background: rgba(255,255,255,0.08); margin-top: 64px;
+    border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); overflow: hidden;
+  }
+  .adv-item { background: var(--graphite); padding: 40px 28px; text-align: center; transition: background .3s; }
+  .adv-item:hover { background: rgba(201,169,110,0.08); }
+  .adv-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--gold); line-height: 1; margin-bottom: 16px; }
+  .adv-title { font-size: 12px; font-weight: 600; letter-spacing: 0.05em; color: var(--white); margin-bottom: 8px; }
+  .adv-desc { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+  /* PRICES */
+  .prices { background: var(--white); }
+  .prices-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 24px; }
+  .price-list { display: flex; flex-direction: column; }
+  .price-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 0; border-bottom: 1px solid var(--grey-cold);
+    gap: 16px; transition: all .2s; cursor: default;
+  }
+  .price-item:first-child { border-top: 1px solid var(--grey-cold); }
+  .price-item:hover { padding-left: 8px; }
+  .price-left { flex: 1; }
+  .price-name { font-size: 14px; font-weight: 500; color: var(--graphite); margin-bottom: 3px; }
+  .price-note { font-size: 11px; color: var(--grey-text); }
+  .price-val { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--graphite); white-space: nowrap; flex-shrink: 0; }
+  .price-currency { font-family: 'Manrope', sans-serif; font-size: 12px; color: var(--grey-text); font-weight: 400; }
+  .price-note-bottom { margin-top: 24px; font-size: 11px; color: var(--grey-text); font-style: italic; text-align: center; }
+
+  /* REVIEWS */
+  .reviews { background: var(--milk); }
+  .reviews-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 24px; }
+  .rating-badge {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--white); border: 1px solid rgba(201,169,110,0.2);
+    padding: 16px 24px; border-radius: var(--radius-lg);
+  }
+  .rating-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; line-height: 1; color: var(--graphite); }
+  .rating-stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; }
+  .rating-count { font-size: 11px; color: var(--grey-text); margin-top: 2px; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .review-card { background: var(--white); border: 1px solid rgba(201,169,110,0.12); padding: 28px; border-radius: var(--radius-lg); transition: box-shadow .3s; }
+  .review-card:hover { box-shadow: var(--shadow-card); }
+  .review-stars { color: var(--gold); font-size: 12px; letter-spacing: 2px; margin-bottom: 16px; }
+  .review-text { font-size: 13px; color: var(--graphite-soft); line-height: 1.8; font-weight: 300; margin-bottom: 20px; font-style: italic; }
+  .review-text::before { content: '\00AB'; }
+  .review-text::after { content: '\00BB'; }
+  .review-author { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid var(--grey-cold); }
+  .review-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--beige); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--gold); font-weight: 600; flex-shrink: 0; }
+  .review-name { font-size: 13px; font-weight: 600; color: var(--graphite); }
+  .review-date { font-size: 10px; color: var(--grey-text); margin-top: 1px; }
+
+  /* CONTACTS */
+  .contacts { background: var(--white); }
+  .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 56px; align-items: start; }
+  .contact-block { margin-bottom: 32px; }
+  .contact-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+  .contact-value { font-size: 16px; color: var(--graphite); }
+  .contact-value a { color: var(--graphite); text-decoration: none; transition: color .2s; }
+  .contact-value a:hover { color: var(--gold); }
+  .hours-grid { display: flex; flex-direction: column; gap: 6px; }
+  .hours-row { display: flex; justify-content: space-between; font-size: 13px; padding-bottom: 6px; border-bottom: 1px solid var(--grey-cold); }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-day { color: var(--grey-text); }
+  .hours-time { font-weight: 500; color: var(--graphite); }
+  .contact-ctas { display: flex; flex-direction: column; gap: 12px; margin-top: 36px; }
+  .btn-wa {
+    background: #25D366; color: white;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 28px; border-radius: var(--radius);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+    text-decoration: none; transition: all .25s;
+  }
+  .btn-wa:hover { background: #1ebe5a; box-shadow: 0 4px 16px rgba(37,211,102,0.3); }
+  .map-container { border-radius: var(--radius-lg); overflow: hidden; height: 400px; background: var(--beige); border: 1px solid var(--grey-cold); }
+  .map-container iframe { width: 100%; height: 100%; border: none; }
+
+  /* FOOTER */
+  footer { background: var(--graphite); padding: 48px 24px; text-align: center; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--white); letter-spacing: 0.08em; margin-bottom: 4px; }
+  .footer-tagline { font-size: 10px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 28px; }
+  .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+  .footer-links a { font-size: 11px; color: rgba(255,255,255,0.4); text-decoration: none; letter-spacing: 0.1em; transition: color .2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); }
+
+  /* FAB */
+  .fab-wa {
+    position: fixed; bottom: 28px; right: 24px; z-index: 200;
+    width: 56px; height: 56px; background: #25D366;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4); cursor: pointer; transition: all .3s; text-decoration: none;
+  }
+  .fab-wa:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
+  .fab-wa svg { width: 26px; height: 26px; fill: white; }
+
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .stagger-1 { transition-delay: .1s; }
+  .stagger-2 { transition-delay: .2s; }
+  .stagger-3 { transition-delay: .3s; }
+  .stagger-4 { transition-delay: .4s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .advantages-grid { grid-template-columns: repeat(3, 1fr); }
+    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    .hero-right { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .hero-stats-row { display: contents; }
+    .hero-tags { display: none; }
+  }
+  @media (max-width: 768px) {
+    section { padding: 64px 20px; }
+    nav { display: none; }
+    .header-cta { display: none; }
+    .burger { display: block; }
+    .hero-inner { padding: 48px 20px 72px; grid-template-columns: 1fr; }
+    .hero-title { font-size: clamp(42px, 12vw, 64px); }
+    .hero-right { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .about-badge { bottom: -16px; right: 16px; }
+    .services-intro { grid-template-columns: 1fr; gap: 24px; }
+    .advantages-grid { grid-template-columns: repeat(2, 1fr); }
+    .adv-item:last-child { grid-column: 1/-1; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .contacts-grid { grid-template-columns: 1fr; gap: 40px; }
+    .prices-header { flex-direction: column; align-items: flex-start; }
+    .reviews-header { flex-direction: column; align-items: flex-start; }
+    .fab-wa { bottom: 20px; right: 16px; }
+  }
+  @media (max-width: 480px) {
+    .hero-right { grid-template-columns: 1fr; }
+    .hero-actions { flex-direction: column; }
+    .hero-actions .btn { width: 100%; text-align: center; }
+    .advantages-grid { grid-template-columns: 1fr; }
+    .adv-item:last-child { grid-column: auto; }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobileMenu()">О клинике</a>
+  <a href="#services" onclick="closeMobileMenu()">Услуги</a>
+  <a href="#prices" onclick="closeMobileMenu()">Цены</a>
+  <a href="#reviews" onclick="closeMobileMenu()">Отзывы</a>
+  <a href="#contacts" onclick="closeMobileMenu()">Контакты</a>
+  <a href="https://wa.me/73852000000" class="btn btn-gold" style="font-size:11px;padding:14px 32px;">Записаться</a>
+</div>
+
+<header id="header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <span class="logo-main">Ю Skin Clinic</span>
+      <span class="logo-sub">Барнаул · Косметология</span>
+    </a>
+    <nav>
+      <a href="#about">О клинике</a>
+      <a href="#services">Услуги</a>
+      <a href="#prices">Цены</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a href="https://wa.me/73852000000" class="btn btn-gold nav-cta header-cta">Записаться</a>
+    <button class="burger" id="burgerBtn" onclick="toggleMenu()" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-left fade-in">
+      <div class="hero-label">Барнаул · Малахова, 134а к2</div>
+      <h1 class="hero-title">Ю Skin<br><em>Clinic</em></h1>
+      <p class="hero-desc">Клиника эстетической и аппаратной косметологии. Дерматологический подход, индивидуальные протоколы, сертифицированные процедуры.</p>
+      <div class="hero-actions">
+        <a href="#contacts" class="btn btn-gold">Записаться на приём</a>
+        <a href="https://wa.me/73852000000" class="btn btn-outline">WhatsApp консультация</a>
+      </div>
+    </div>
+    <div class="hero-right fade-in stagger-2">
+      <div class="hero-stats-row">
+        <div class="hero-stat-card">
+          <div class="stat-num">8<span>+</span></div>
+          <div class="stat-label">лет в косметологии</div>
+        </div>
+        <div class="hero-stat-card">
+          <div class="stat-num">4.9<span>★</span></div>
+          <div class="stat-label">рейтинг клиники</div>
+        </div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="stat-num">1200<span>+</span></div>
+        <div class="stat-label">довольных клиентов</div>
+      </div>
+      <div class="hero-tags">
+        <span class="hero-tag">Медицинская лицензия</span>
+        <span class="hero-tag">Сертифицированные процедуры</span>
+        <span class="hero-tag">Современное оборудование</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image fade-in">
+        <div class="about-image-box">
+          <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <rect width="400" height="500" fill="#F2EDE6"/>
+            <circle cx="200" cy="210" r="170" fill="none" stroke="#C9A96E" stroke-width="0.5" opacity="0.2"/>
+            <circle cx="200" cy="210" r="130" fill="none" stroke="#C9A96E" stroke-width="0.5" opacity="0.25"/>
+            <circle cx="200" cy="210" r="90" fill="rgba(201,169,110,0.07)"/>
+            <circle cx="200" cy="210" r="50" fill="rgba(201,169,110,0.1)"/>
+            <line x1="200" y1="80" x2="200" y2="340" stroke="#C9A96E" stroke-width="0.7" opacity="0.3"/>
+            <line x1="70" y1="210" x2="330" y2="210" stroke="#C9A96E" stroke-width="0.7" opacity="0.3"/>
+            <circle cx="200" cy="210" r="5" fill="#C9A96E" opacity="0.5"/>
+            <circle cx="200" cy="120" r="2.5" fill="#C9A96E" opacity="0.35"/>
+            <circle cx="290" cy="210" r="2.5" fill="#C9A96E" opacity="0.35"/>
+            <circle cx="200" cy="300" r="2.5" fill="#C9A96E" opacity="0.35"/>
+            <circle cx="110" cy="210" r="2.5" fill="#C9A96E" opacity="0.35"/>
+            <text x="200" y="230" text-anchor="middle" font-family="Georgia,serif" font-size="72" font-weight="300" fill="#C9A96E" opacity="0.1">Ю</text>
+            <line x1="80" y1="420" x2="320" y2="420" stroke="#C9A96E" stroke-width="0.5" opacity="0.2"/>
+            <line x1="120" y1="440" x2="280" y2="440" stroke="#C9A96E" stroke-width="0.5" opacity="0.12"/>
+            <rect x="185" y="460" width="30" height="0.8" fill="#C9A96E" opacity="0.35"/>
+          </svg>
+        </div>
+        <div class="about-badge">
+          <div class="badge-num">8+</div>
+          <div class="badge-txt">лет опыта</div>
+        </div>
+      </div>
+      <div class="about-content fade-in stagger-2">
+        <div class="section-label">О клинике</div>
+        <h2 class="section-title">Дерматологический<br>подход к <em>красоте</em></h2>
+        <p class="about-text">Ю Skin Clinic — это медицинская косметология, основанная на понимании физиологии кожи. Каждая процедура начинается с анализа: мы не предлагаем универсальных решений, мы создаём индивидуальный протокол для вашей кожи.</p>
+        <div class="about-features">
+          <div class="about-feature">
+            <div class="feature-icon">⚕</div>
+            <div class="feature-text">
+              <div class="feature-title">Медицинский подход</div>
+              <div class="feature-desc">Работаем по клиническим протоколам, а не салонным стандартам</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feature-icon">✦</div>
+            <div class="feature-text">
+              <div class="feature-title">Стерильность и безопасность</div>
+              <div class="feature-desc">Одноразовые расходники, дезинфекция по медицинским стандартам</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feature-icon">◈</div>
+            <div class="feature-text">
+              <div class="feature-title">Современное оборудование</div>
+              <div class="feature-desc">Сертифицированные аппараты европейского производства</div>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="feature-icon">◎</div>
+            <div class="feature-text">
+              <div class="feature-title">Индивидуальные протоколы</div>
+              <div class="feature-desc">Комплексный анализ кожи перед назначением процедур</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-intro">
+      <div>
+        <div class="section-label fade-in">Процедуры</div>
+        <h2 class="section-title fade-in stagger-1">Наши <em>услуги</em></h2>
+      </div>
+      <p class="services-intro-text fade-in stagger-2">Полный спектр эстетической косметологии — от аппаратных методик до инъекционных протоколов.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="22" cy="22" r="18" stroke-opacity="0.3"/><path d="M22 10v24M10 22h24" stroke-linecap="round"/><circle cx="22" cy="22" r="4" fill="currentColor" fill-opacity="0.2"/></svg>
+        <div class="service-category">Аппаратная косметология</div>
+        <div class="service-name">RF-лифтинг</div>
+        <div class="service-desc">Радиочастотное омоложение кожи. Подтяжка овала лица без операции.</div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card fade-in stagger-1">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M22 8l2 8h8l-6.5 4.5 2.5 8.5L22 25l-6 4 2.5-8.5L12 16h8z" stroke-linejoin="round"/></svg>
+        <div class="service-category">Аппаратная косметология</div>
+        <div class="service-name">Фотоомоложение</div>
+        <div class="service-desc">IPL-терапия для выравнивания тона, устранения пигментации и расширенных пор.</div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card fade-in stagger-2">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 22c0-7.7 6.3-14 14-14s14 6.3 14 14-6.3 14-14 14"/><path d="M22 28a6 6 0 100-12 6 6 0 000 12z" stroke-opacity="0.5"/><path d="M22 22h-8" stroke-linecap="round"/></svg>
+        <div class="service-category">Аппаратная косметология</div>
+        <div class="service-name">Уходовые процедуры</div>
+        <div class="service-desc">Аппаратный уход: кислородная терапия, микротоки, дарсонваль.</div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card fade-in">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M30 8l6 6-20 20-8 2 2-8z" stroke-linejoin="round"/><path d="M24 14l6 6" stroke-opacity="0.5"/></svg>
+        <div class="service-category">Инъекционная косметология</div>
+        <div class="service-name">Биоревитализация</div>
+        <div class="service-desc">Глубокое увлажнение и восстановление кожи. Гиалуроновая кислота нового поколения.</div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card fade-in stagger-1">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="22" cy="16" r="6"/><path d="M14 36c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke-linecap="round"/><path d="M22 22v6" stroke-linecap="round" stroke-opacity="0.5"/></svg>
+        <div class="service-category">Инъекционная косметология</div>
+        <div class="service-name">Мезотерапия</div>
+        <div class="service-desc">Коктейли с витаминами, аминокислотами и пептидами для восстановления кожи.</div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card fade-in stagger-2">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 32L22 12l10 20" stroke-linejoin="round"/><path d="M15 26h14" stroke-linecap="round" stroke-opacity="0.5"/></svg>
+        <div class="service-category">Инъекционная косметология</div>
+        <div class="service-name">Ботулинотерапия</div>
+        <div class="service-desc">Коррекция мимических морщин. Только сертифицированные препараты.</div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card fade-in">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 36s4-12 14-12 14 12 14 12" stroke-linecap="round"/><circle cx="22" cy="18" r="8"/><path d="M22 10v16M14 18h16" stroke-opacity="0.3" stroke-linecap="round"/></svg>
+        <div class="service-category">Инъекционная косметология</div>
+        <div class="service-name">Коллагеностимуляция</div>
+        <div class="service-desc">Стимуляция выработки собственного коллагена. Долгосрочный лифтинг-эффект.</div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card fade-in stagger-1">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 32L22 8l10 24"/><path d="M22 8v12" stroke-opacity="0.4" stroke-linecap="round"/><circle cx="22" cy="30" r="3" fill="currentColor" fill-opacity="0.15"/></svg>
+        <div class="service-category">Чистка и уход</div>
+        <div class="service-name">Комбинированная чистка</div>
+        <div class="service-desc">Глубокое очищение с механической и химической составляющей для проблемной кожи.</div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card fade-in stagger-2">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M22 8l14 14-14 14L8 22z"/><circle cx="22" cy="22" r="5" stroke-opacity="0.4"/></svg>
+        <div class="service-category">Чистка и уход</div>
+        <div class="service-name">Пилинги</div>
+        <div class="service-desc">Поверхностные и срединные пилинги. Яркость, молодость, ровный рельеф кожи.</div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card fade-in">
+        <svg class="service-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M22 8v4M30.5 13.5l-2.8 2.8M34 22h-4M30.5 30.5l-2.8-2.8M22 34v-4M13.5 30.5l2.8-2.8M10 22h4M13.5 13.5l2.8 2.8" stroke-linecap="round"/><circle cx="22" cy="22" r="5"/></svg>
+        <div class="service-category">Лазерные процедуры</div>
+        <div class="service-name">Лазерное омоложение</div>
+        <div class="service-desc">Фракционный лазер для обновления кожи. Устранение рубцов, пор, следов акне.</div>
+        <span class="service-arrow">→</span>
+      </div>
+      <div class="service-card fade-in stagger-1" style="background:var(--graphite);border-color:transparent;cursor:default;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px;color:white;font-weight:300;margin-bottom:12px;line-height:1.25;">Не нашли нужную <em style="color:var(--gold-light);">процедуру?</em></div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:24px;font-weight:300;">Свяжитесь с нами — подберём оптимальный протокол</p>
+        <a href="https://wa.me/73852000000" class="btn btn-gold" style="background:var(--gold);color:white;padding:12px 22px;font-size:10px;width:fit-content;">Задать вопрос</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="advantages" id="advantages">
+  <div class="container">
+    <div class="section-label fade-in">Почему мы</div>
+    <h2 class="section-title fade-in stagger-1">Стандарты, которым<br>вы <em>доверяете</em></h2>
+    <div class="advantages-grid">
+      <div class="adv-item fade-in"><div class="adv-num">01</div><div class="adv-title">Медицинский контроль</div><div class="adv-desc">Каждая процедура проводится по клиническому протоколу с контролем безопасности</div></div>
+      <div class="adv-item fade-in stagger-1"><div class="adv-num">02</div><div class="adv-title">Стерильность</div><div class="adv-desc">Одноразовые инструменты, дезинфекция по медицинским стандартам после каждого визита</div></div>
+      <div class="adv-item fade-in stagger-2"><div class="adv-num">03</div><div class="adv-title">Индивидуально</div><div class="adv-desc">Протокол составляется после анализа состояния кожи — без универсальных шаблонов</div></div>
+      <div class="adv-item fade-in stagger-3"><div class="adv-num">04</div><div class="adv-title">Оборудование</div><div class="adv-desc">Сертифицированные аппараты европейского производства с регулярным техобслуживанием</div></div>
+      <div class="adv-item fade-in stagger-4"><div class="adv-num">05</div><div class="adv-title">Экспертиза</div><div class="adv-desc">Специалисты с медицинским образованием и постоянным повышением квалификации</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="prices" id="prices">
+  <div class="container">
+    <div class="prices-header">
+      <div>
+        <div class="section-label fade-in">Стоимость</div>
+        <h2 class="section-title fade-in stagger-1">Цены на <em>процедуры</em></h2>
+      </div>
+      <a href="https://wa.me/73852000000" class="btn btn-outline fade-in stagger-2">Полный прайс-лист →</a>
+    </div>
+    <div class="price-list fade-in stagger-1">
+      <div class="price-item"><div class="price-left"><div class="price-name">Биоревитализация</div><div class="price-note">1 сеанс, 1 мл препарата</div></div><div class="price-val">от 4 500 <span class="price-currency">₽</span></div></div>
+      <div class="price-item"><div class="price-left"><div class="price-name">Ботулинотерапия</div><div class="price-note">межбровье / лоб / периорбитальная зона</div></div><div class="price-val">от 6 000 <span class="price-currency">₽</span></div></div>
+      <div class="price-item"><div class="price-left"><div class="price-name">RF-лифтинг лица</div><div class="price-note">1 сеанс, полное лицо</div></div><div class="price-val">от 5 500 <span class="price-currency">₽</span></div></div>
+      <div class="price-item"><div class="price-left"><div class="price-name">Лазерное омоложение</div><div class="price-note">фракционный лазер, лицо</div></div><div class="price-val">от 7 000 <span class="price-currency">₽</span></div></div>
+      <div class="price-item"><div class="price-left"><div class="price-name">Мезотерапия</div><div class="price-note">витаминный коктейль, 1 сеанс</div></div><div class="price-val">от 3 800 <span class="price-currency">₽</span></div></div>
+      <div class="price-item"><div class="price-left"><div class="price-name">Фотоомоложение</div><div class="price-note">IPL-терапия, 1 зона</div></div><div class="price-val">от 4 000 <span class="price-currency">₽</span></div></div>
+      <div class="price-item"><div class="price-left"><div class="price-name">Комбинированная чистка</div><div class="price-note">включает маску и уход</div></div><div class="price-val">от 3 500 <span class="price-currency">₽</span></div></div>
+      <div class="price-item"><div class="price-left"><div class="price-name">Срединный пилинг</div><div class="price-note">трихлоруксусная / ретиноловый</div></div><div class="price-val">от 4 200 <span class="price-currency">₽</span></div></div>
+    </div>
+    <p class="price-note-bottom">Точная стоимость определяется после консультации. Первичная консультация — бесплатно.</p>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="reviews-header">
+      <div>
+        <div class="section-label fade-in">Отзывы</div>
+        <h2 class="section-title fade-in stagger-1">Клиенты о нас</h2>
+      </div>
+      <div class="rating-badge fade-in stagger-2">
+        <div class="rating-num">4.9</div>
+        <div><div class="rating-stars">★★★★★</div><div class="rating-count">более 200 отзывов</div></div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Делала биоревитализацию. Результат потрясающий — кожа буквально светится. Специалист объяснила всё подробно, посоветовала именно тот препарат, который подойдёт моему типу кожи. Обязательно вернусь.</div>
+        <div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Анастасия М.</div><div class="review-date">апрель 2025</div></div></div>
+      </div>
+      <div class="review-card fade-in stagger-1">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Наконец-то нашла клинику, где к процедурам подходят как в медицине — сначала консультация, анализ кожи, и только потом процедура. RF-лифтинг сделал то, что обещал. Спасибо за профессионализм.</div>
+        <div class="review-author"><div class="review-avatar">Е</div><div><div class="review-name">Елена В.</div><div class="review-date">март 2025</div></div></div>
+      </div>
+      <div class="review-card fade-in stagger-2">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Ботулинотерапия — первый раз. Боялась, но всё прошло отлично. Результат очень естественный, лицо живое. Видно, что специалист работает с большим опытом. Клиника чистая, всё стерильно.</div>
+        <div class="review-author"><div class="review-avatar">О</div><div><div class="review-name">Ольга Т.</div><div class="review-date">февраль 2025</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contacts" id="contacts">
+  <div class="container">
+    <div class="section-label fade-in">Контакты</div>
+    <h2 class="section-title fade-in stagger-1">Запишитесь<br>на <em>консультацию</em></h2>
+    <div class="contacts-grid">
+      <div class="fade-in stagger-2">
+        <div class="contact-block"><div class="contact-label">Адрес</div><div class="contact-value">Барнаул, ул. Малахова, 134а к2</div></div>
+        <div class="contact-block"><div class="contact-label">Телефон</div><div class="contact-value"><a href="tel:+73852000000">+7 (3852) 00-00-00</a></div></div>
+        <div class="contact-block">
+          <div class="contact-label">Режим работы</div>
+          <div class="hours-grid">
+            <div class="hours-row"><span class="hours-day">Понедельник – Пятница</span><span class="hours-time">09:00 – 20:00</span></div>
+            <div class="hours-row"><span class="hours-day">Суббота</span><span class="hours-time">09:00 – 16:00</span></div>
+            <div class="hours-row"><span class="hours-day">Воскресенье</span><span class="hours-time">Выходной</span></div>
+          </div>
+        </div>
+        <div class="contact-ctas">
+          <a href="https://wa.me/73852000000" class="btn-wa">
+            <svg viewBox="0 0 24 24" fill="white" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Написать в WhatsApp
+          </a>
+          <a href="tel:+73852000000" class="btn btn-gold" style="width:100%;justify-content:center;">Позвонить</a>
+        </div>
+      </div>
+      <div class="map-container fade-in stagger-3">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2369.1!2d83.7985!3d53.3376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43dcd500!2zTWFsYWtob3ZhIDEzNGE!5e0!3m2!1sru!2sru!4v1699" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ю Skin Clinic на карте"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Ю Skin Clinic</div>
+    <div class="footer-tagline">Барнаул · Эстетическая косметология</div>
+    <div class="footer-links">
+      <a href="#about">О клинике</a>
+      <a href="#services">Услуги</a>
+      <a href="#prices">Цены</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </div>
+    <div class="footer-copy">© 2025 Ю Skin Clinic · Барнаул, ул. Малахова, 134а к2</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/73852000000" class="fab-wa" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 20); });
+
+  let menuOpen = false;
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    document.getElementById('mobileMenu').classList.toggle('open', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  }
+  function closeMobileMenu() {
+    menuOpen = false;
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
