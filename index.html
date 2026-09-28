@@ -348,10 +348,151 @@
     .fade-in { opacity: 1; transform: none; transition: none; }
   }
 </style>
+<style id="portfolio-finish">
+  :root {
+    --gold: #89683f;
+    --grey-text: #696760;
+    --shadow-soft: 0 8px 30px rgba(45,37,28,.07);
+    --shadow-card: 0 16px 44px rgba(45,37,28,.12);
+  }
+  html { scroll-padding-top: 92px; }
+  body { overflow-x: hidden; }
+  section[id] { scroll-margin-top: 88px; }
+  a, button { -webkit-tap-highlight-color: transparent; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+  .header-inner { height: 76px; }
+  header { box-shadow: 0 4px 24px rgba(42,42,42,.025); }
+  nav { gap: clamp(14px, 2vw, 28px); }
+  nav a { font-size: 11px; letter-spacing: .09em; }
+  .btn { min-height: 46px; transition: background-color .25s, color .25s, border-color .25s, box-shadow .25s, transform .25s; }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(42,42,42,.16); }
+  .btn-outline:hover { background: var(--gold-pale); }
+  .mobile-menu { visibility: hidden; pointer-events: none; padding: 88px 24px 36px; }
+  .mobile-menu.open { visibility: visible; pointer-events: auto; }
+  .mobile-menu a { min-height: 44px; display: inline-flex; align-items: center; }
+  .hero { min-height: 100svh; min-height: max(760px, 100svh); padding-top: 76px; }
+  .hero-inner { max-width: 1280px; grid-template-columns: minmax(0, .9fr) minmax(420px, 1.1fr); gap: clamp(36px, 6vw, 92px); align-items: center; padding-top: 66px; padding-bottom: 72px; }
+  .hero-label, .section-label { color: var(--gold); }
+  .hero-title { font-size: clamp(56px, 7vw, 94px); letter-spacing: -.025em; }
+  .hero-desc, .about-text, .services-intro-text { color: var(--grey-text); }
+  .hero-right { display: flex; min-width: 0; flex-direction: column; gap: 14px; align-self: center; }
+  .hero-photo-wrap { position: relative; }
+  .photo-placeholder { position: relative; isolation: isolate; display: flex; align-items: flex-end; overflow: hidden; border: 1px solid rgba(137,104,63,.15); border-radius: 5px; background: linear-gradient(145deg,#e9dfd2 0%,#f8f4ed 49%,#d9c9b4 100%); box-shadow: var(--shadow-card); }
+  .photo-placeholder::before, .photo-placeholder::after { content: ''; position: absolute; z-index: -1; border: 1px solid rgba(137,104,63,.2); border-radius: 50%; pointer-events: none; }
+  .photo-placeholder::before { width: 74%; aspect-ratio: 1; top: -16%; right: -10%; box-shadow: 0 0 0 22px rgba(255,255,255,.09), 0 0 0 52px rgba(137,104,63,.035); }
+  .photo-placeholder::after { width: 48%; aspect-ratio: 1; bottom: 3%; left: -13%; background: radial-gradient(circle,rgba(255,255,255,.34),transparent 69%); }
+  .photo-placeholder--hero { aspect-ratio: 1.35 / 1; min-height: 380px; }
+  .photo-placeholder--about { width: 100%; height: 100%; min-height: 420px; aspect-ratio: 4 / 5; box-shadow: none; border: 0; border-radius: 3px; background: linear-gradient(155deg,#e7ded2 0%,#f6f1e9 51%,#d9c8b2 100%); }
+  .photo-placeholder--about::before { width: 88%; top: -7%; right: -20%; }
+  .photo-monogram { position: absolute; z-index: -1; top: 7%; right: 9%; color: rgba(137,104,63,.2); font: 300 clamp(130px,20vw,250px)/.9 'Cormorant Garamond',serif; }
+  .photo-placeholder--about .photo-monogram { top: 9%; right: 12%; font-size: clamp(150px,22vw,270px); }
+  .photo-placeholder-caption { position: relative; z-index: 1; display: grid; gap: 3px; margin: 18px; padding: 13px 16px; border: 1px solid rgba(255,255,255,.75); border-radius: 3px; background: rgba(255,255,255,.82); box-shadow: 0 8px 22px rgba(45,37,28,.07); backdrop-filter: blur(10px); }
+  .photo-placeholder-caption span { color: var(--gold); font-size: 9px; font-weight: 600; letter-spacing: .19em; text-transform: uppercase; }
+  .photo-placeholder-caption strong { color: var(--graphite); font-size: 12px; font-weight: 600; letter-spacing: .015em; }
+  .photo-placeholder-caption small { color: var(--grey-text); font-size: 10px; }
+  .hero-rating-card { position: absolute; right: 20px; bottom: 20px; z-index: 2; min-width: 132px; padding: 15px 18px; border-color: rgba(255,255,255,.72); }
+  .hero-rating-card .stat-num { font-size: 34px; }
+  .hero-meta-row { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+  .hero-meta-row .hero-stat-card { padding: 16px 20px; }
+  .hero-meta-row .stat-num { font-size: 34px; }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .hero-tag { font-size: 10px; color: var(--graphite-soft); padding: 7px 11px; border-color: rgba(137,104,63,.17); }
+  .about-grid { gap: clamp(44px, 7vw, 100px); }
+  .about-image-box { background: transparent; overflow: visible; }
+  .about-badge { bottom: -14px; right: -18px; z-index: 2; }
+  .badge-num { font-size: 30px; }
+  .badge-txt { max-width: 128px; color: rgba(255,255,255,.78); letter-spacing: .08em; }
+  .service-card { cursor: default; padding-bottom: 30px; }
+  .service-card:hover { transform: translateY(-3px); }
+  .service-arrow { display: none; }
+  .adv-num { color: var(--gold-light); }
+  .adv-desc { color: rgba(255,255,255,.68); }
+  .rating-count, .review-date { color: var(--grey-text); }
+  .review-card { box-shadow: 0 4px 20px rgba(45,37,28,.025); }
+  .review-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); }
+  .contact-label, .hours-day { color: var(--grey-text); }
+  .map-container { position: relative; min-height: 340px; }
+  .map-open { position: absolute; right: 14px; bottom: 14px; display: inline-flex; gap: 9px; align-items: center; padding: 11px 15px; border-radius: 2px; background: white; color: var(--graphite); box-shadow: var(--shadow-soft); text-decoration: none; font-size: 11px; font-weight: 600; }
+  .map-open:hover { color: var(--gold); }
+  .footer-links a { color: rgba(255,255,255,.68); }
+  .footer-copy { color: rgba(255,255,255,.58); }
+  .fab-wa { width: 54px; height: 54px; }
+  .fade-in { opacity: 1; transform: none; transition: none; }
+  html.motion-ok .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s cubic-bezier(.2,.7,.2,1); }
+  html.motion-ok .fade-in.visible { opacity: 1; transform: translateY(0); }
+  @media (max-width: 1100px) {
+    .hero-inner { grid-template-columns: minmax(0,.85fr) minmax(360px,1fr); gap: 36px; }
+    .photo-placeholder--hero { min-height: 340px; }
+    .hero-tag { font-size: 9px; }
+    .advantages-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  }
+  @media (max-width: 900px) {
+    nav, .header-cta { display: none; }
+    .burger { display: block; }
+    .hero { min-height: auto; }
+    .hero-inner { grid-template-columns: minmax(0,1fr); max-width: 760px; gap: 44px; padding: 64px 24px 76px; }
+    .hero-left { max-width: 610px; }
+    .hero-right { width: 100%; max-width: 650px; margin-inline: auto; }
+    .photo-placeholder--hero { min-height: 390px; }
+    .services-intro { gap: 36px; }
+    .contacts-grid { gap: 46px; }
+  }
+  @media (max-width: 768px) {
+    section { padding: 68px 20px; }
+    .header-inner { height: 68px; padding-inline: 20px; }
+    .hero { padding-top: 68px; }
+    .hero-inner { padding: 48px 20px 64px; gap: 36px; }
+    .hero-title { font-size: clamp(48px, 12vw, 72px); }
+    .hero-desc { font-size: 14px; margin-bottom: 28px; }
+    .photo-placeholder--hero { min-height: 340px; }
+    .hero-meta-row .hero-stat-card { padding: 14px; }
+    .hero-meta-row .stat-num { font-size: 30px; }
+    .about-grid { gap: 44px; }
+    .about-image-box { max-width: 480px; margin-inline: auto; }
+    .about-badge { right: 8px; bottom: -14px; }
+    .advantages-grid { grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: 40px; }
+    .reviews-grid { grid-template-columns: 1fr; gap: 12px; }
+    .contacts-grid { grid-template-columns: 1fr; }
+    .map-container { min-height: 300px; height: 340px; }
+    .prices-header, .reviews-header { gap: 18px; }
+  }
+  @media (max-width: 520px) {
+    .hero-label { font-size: 9px; letter-spacing: .2em; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .btn { width: 100%; }
+    .photo-placeholder--hero { min-height: 300px; aspect-ratio: 1.05 / 1; }
+    .photo-placeholder-caption { margin: 12px; padding: 11px 12px; }
+    .photo-placeholder-caption strong { font-size: 11px; }
+    .hero-rating-card { right: 12px; bottom: 12px; min-width: 112px; padding: 11px 13px; }
+    .hero-meta-row { gap: 8px; }
+    .hero-meta-row .stat-num { font-size: 27px; }
+    .hero-meta-row .stat-label { font-size: 10px; }
+    .hero-tags { gap: 6px; }
+    .hero-tag { font-size: 9px; }
+    .about-image-box { max-width: 400px; }
+    .photo-placeholder--about { min-height: 400px; }
+    .advantages-grid { grid-template-columns: 1fr; }
+    .adv-item:last-child { grid-column: auto; }
+    .services-grid { grid-template-columns: 1fr; }
+    .price-item { align-items: flex-start; }
+    .price-name { font-size: 13px; }
+    .price-val { font-size: 19px; }
+    .hours-row { gap: 12px; font-size: 12px; }
+    .map-container { min-height: 280px; height: 300px; }
+    .map-open { left: 10px; right: 10px; justify-content: center; }
+    .fab-wa { bottom: max(14px, env(safe-area-inset-bottom)); right: 14px; width: 50px; height: 50px; }
+    footer { padding-bottom: max(40px, env(safe-area-inset-bottom)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    html.motion-ok .fade-in { opacity: 1; transform: none; }
+  }
+</style>
 </head>
 <body>
 
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <a href="#about" onclick="closeMobileMenu()">О клинике</a>
   <a href="#services" onclick="closeMobileMenu()">Услуги</a>
   <a href="#prices" onclick="closeMobileMenu()">Цены</a>
@@ -362,11 +503,11 @@
 
 <header id="header">
   <div class="header-inner">
-    <a href="#" class="logo">
+    <a href="#hero" class="logo" aria-label="Ю Skin Clinic — на главную">
       <span class="logo-main">Ю Skin Clinic</span>
       <span class="logo-sub">Барнаул · Косметология</span>
     </a>
-    <nav>
+    <nav aria-label="Основная навигация">
       <a href="#about">О клинике</a>
       <a href="#services">Услуги</a>
       <a href="#prices">Цены</a>
@@ -374,7 +515,7 @@
       <a href="#contacts">Контакты</a>
     </nav>
     <a href="https://wa.me/73852000000" class="btn btn-gold nav-cta header-cta">Записаться</a>
-    <button class="burger" id="burgerBtn" onclick="toggleMenu()" aria-label="Меню">
+    <button class="burger" id="burgerBtn" type="button" onclick="toggleMenu()" aria-label="Открыть меню" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -394,19 +535,29 @@
       </div>
     </div>
     <div class="hero-right fade-in stagger-2">
-      <div class="hero-stats-row">
+      <div class="hero-photo-wrap">
+        <div class="photo-placeholder photo-placeholder--hero" role="img" aria-label="Место для фотографии интерьера клиники. Файл: images/hero-clinic.jpg">
+          <span class="photo-monogram" aria-hidden="true">Ю</span>
+          <div class="photo-placeholder-caption">
+            <span>Фотография клиники</span>
+            <strong>images/hero-clinic.jpg</strong>
+            <small>горизонтальный кадр · 3:2</small>
+          </div>
+        </div>
+        <div class="hero-stat-card hero-rating-card">
+          <div class="stat-num">4.9<span>★</span></div>
+          <div class="stat-label">рейтинг клиники</div>
+        </div>
+      </div>
+      <div class="hero-meta-row">
         <div class="hero-stat-card">
           <div class="stat-num">8<span>+</span></div>
           <div class="stat-label">лет в косметологии</div>
         </div>
         <div class="hero-stat-card">
-          <div class="stat-num">4.9<span>★</span></div>
-          <div class="stat-label">рейтинг клиники</div>
+          <div class="stat-num">1200<span>+</span></div>
+          <div class="stat-label">довольных клиентов</div>
         </div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="stat-num">1200<span>+</span></div>
-        <div class="stat-label">довольных клиентов</div>
       </div>
       <div class="hero-tags">
         <span class="hero-tag">Медицинская лицензия</span>
@@ -422,28 +573,18 @@
     <div class="about-grid">
       <div class="about-image fade-in">
         <div class="about-image-box">
-          <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
-            <rect width="400" height="500" fill="#F2EDE6"/>
-            <circle cx="200" cy="210" r="170" fill="none" stroke="#C9A96E" stroke-width="0.5" opacity="0.2"/>
-            <circle cx="200" cy="210" r="130" fill="none" stroke="#C9A96E" stroke-width="0.5" opacity="0.25"/>
-            <circle cx="200" cy="210" r="90" fill="rgba(201,169,110,0.07)"/>
-            <circle cx="200" cy="210" r="50" fill="rgba(201,169,110,0.1)"/>
-            <line x1="200" y1="80" x2="200" y2="340" stroke="#C9A96E" stroke-width="0.7" opacity="0.3"/>
-            <line x1="70" y1="210" x2="330" y2="210" stroke="#C9A96E" stroke-width="0.7" opacity="0.3"/>
-            <circle cx="200" cy="210" r="5" fill="#C9A96E" opacity="0.5"/>
-            <circle cx="200" cy="120" r="2.5" fill="#C9A96E" opacity="0.35"/>
-            <circle cx="290" cy="210" r="2.5" fill="#C9A96E" opacity="0.35"/>
-            <circle cx="200" cy="300" r="2.5" fill="#C9A96E" opacity="0.35"/>
-            <circle cx="110" cy="210" r="2.5" fill="#C9A96E" opacity="0.35"/>
-            <text x="200" y="230" text-anchor="middle" font-family="Georgia,serif" font-size="72" font-weight="300" fill="#C9A96E" opacity="0.1">Ю</text>
-            <line x1="80" y1="420" x2="320" y2="420" stroke="#C9A96E" stroke-width="0.5" opacity="0.2"/>
-            <line x1="120" y1="440" x2="280" y2="440" stroke="#C9A96E" stroke-width="0.5" opacity="0.12"/>
-            <rect x="185" y="460" width="30" height="0.8" fill="#C9A96E" opacity="0.35"/>
-          </svg>
+          <div class="photo-placeholder photo-placeholder--about" role="img" aria-label="Место для фотографии косметологической процедуры. Файл: images/about-treatment.jpg">
+            <span class="photo-monogram" aria-hidden="true">Ю</span>
+            <div class="photo-placeholder-caption">
+              <span>Фотография процедуры</span>
+              <strong>images/about-treatment.jpg</strong>
+              <small>вертикальный кадр · 4:5</small>
+            </div>
+          </div>
         </div>
         <div class="about-badge">
-          <div class="badge-num">8+</div>
-          <div class="badge-txt">лет опыта</div>
+          <div class="badge-num">Ю</div>
+          <div class="badge-txt">ваша кожа · наш фокус</div>
         </div>
       </div>
       <div class="about-content fade-in stagger-2">
@@ -668,7 +809,8 @@
         </div>
       </div>
       <div class="map-container fade-in stagger-3">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2369.1!2d83.7985!3d53.3376!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43dcd500!2zTWFsYWtob3ZhIDEzNGE!5e0!3m2!1sru!2sru!4v1699" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ю Skin Clinic на карте"></iframe>
+        <iframe src="https://maps.google.com/maps?q=Барнаул%2C%20улица%20Малахова%2C%20134А%20к2&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Карта: Барнаул, улица Малахова, 134а к2"></iframe>
+        <a class="map-open" href="https://www.google.com/maps/search/?api=1&amp;query=Барнаул%2C%20улица%20Малахова%2C%20134А%20к2" target="_blank" rel="noopener noreferrer">Открыть маршрут в Google Картах <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </div>
@@ -685,7 +827,7 @@
       <a href="#reviews">Отзывы</a>
       <a href="#contacts">Контакты</a>
     </div>
-    <div class="footer-copy">© 2025 Ю Skin Clinic · Барнаул, ул. Малахова, 134а к2</div>
+    <div class="footer-copy">© 2026 Ю Skin Clinic · Барнаул, ул. Малахова, 134а к2</div>
   </div>
 </footer>
 
@@ -695,29 +837,56 @@
 
 <script>
   const header = document.getElementById('header');
-  window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 20); });
+  const mobileMenu = document.getElementById('mobileMenu');
+  const burgerBtn = document.getElementById('burgerBtn');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function updateHeader() {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  }
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
 
   let menuOpen = false;
-  function toggleMenu() {
-    menuOpen = !menuOpen;
-    document.getElementById('mobileMenu').classList.toggle('open', menuOpen);
+  function setMenuOpen(open) {
+    menuOpen = open;
+    mobileMenu.classList.toggle('open', menuOpen);
+    mobileMenu.setAttribute('aria-hidden', String(!menuOpen));
+    burgerBtn.setAttribute('aria-expanded', String(menuOpen));
+    burgerBtn.setAttribute('aria-label', menuOpen ? 'Закрыть меню' : 'Открыть меню');
     document.body.style.overflow = menuOpen ? 'hidden' : '';
   }
-  function closeMobileMenu() {
-    menuOpen = false;
-    document.getElementById('mobileMenu').classList.remove('open');
-    document.body.style.overflow = '';
+  function toggleMenu() { setMenuOpen(!menuOpen); }
+  function closeMobileMenu() { setMenuOpen(false); }
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menuOpen) {
+      closeMobileMenu();
+      burgerBtn.focus();
+    }
+  });
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900 && menuOpen) closeMobileMenu();
+  }, { passive: true });
+
+  if (!reduceMotion.matches && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('motion-ok');
+    const observer = new IntersectionObserver((entries, currentObserver) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          currentObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('.fade-in').forEach(element => observer.observe(element));
   }
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', event => {
+      const target = document.getElementById(link.getAttribute('href').slice(1));
+      if (!target) return;
+      event.preventDefault();
+      target.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
     });
   });
 </script>
